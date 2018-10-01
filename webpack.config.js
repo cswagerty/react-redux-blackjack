@@ -5,7 +5,7 @@ const webpack = require('webpack')
 
 module.exports = {
   entry: {
-    app: ['./src/index.js', 'webpack-hot-middleware/client']
+    app: ['./src/app/index.js', 'webpack-hot-middleware/client']
   },
   output: {
     filename: '[name].bundle.js',
@@ -16,18 +16,18 @@ module.exports = {
     new HtmlWebpackPlugin({
         title: 'REACT BOILERPLATE' // creates index.html in dist
     }),
-    new CleanWebpackPlugin(['dist']),  //blows away /dist folder on build,
+    new CleanWebpackPlugin(['dist']),  //blows away /dist folder on build
     new webpack.HotModuleReplacementPlugin()
   ],
   module: {
     rules: [
         {
             test: /\.(js|jsx)$/,
-            exclude: /node_modules/,
-            loader: "babel-loader"
+            exclude: /(node_modules)/,
+            loader: "babel-loader?cacheDirectory=true"
         },
         {
-            test: /\.scss$/,
+            test: /\.(scss|css)$/,
             use: [
                 'style-loader',
                 'css-loader',
@@ -47,9 +47,5 @@ module.exports = {
         }
     ]
   },
-  devServer: {
-    contentBase: './dist',
-    port: 8888
-  },
-  devtool: 'inline-source-map'
+  devtool: 'source-map'
 }
