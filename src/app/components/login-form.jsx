@@ -10,20 +10,24 @@ class LoginForm extends Component {
     }
     
     render() {
-        const { visible, username } = this.props
-        if (this.props.visible === false) {
+        const { visible } = this.props;
+
+        if (visible === false) {
             return null;
         }
         
         return (
-            <form className="player-info-form" onSubmit={this.handleSubmit}>
-                <input type="text" 
-                    value={this.state.username} 
-                    placeholder="Enter username"
-                    onChange={this.handleUsernameChange}
-                />
-                <input type="submit" value="Login" />
-            </form>
+            <section className="player-login-form">
+                <h2>Enter username to begin</h2>
+                <form onSubmit={this.handleSubmit}>
+                    <input type="text" 
+                        value={this.state.username} 
+                        placeholder="Enter username"
+                        onChange={this.handleUsernameChange}
+                    />
+                    <input type="submit" value="Login" />
+                </form>
+            </section>
         );
     }
     

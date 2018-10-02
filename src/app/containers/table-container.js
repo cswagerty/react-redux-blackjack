@@ -1,16 +1,15 @@
 import { connect } from 'react-redux';
 
-import PlayerInfo from '../components/player-info.jsx';
+import Table from '../components/table.jsx';
 
 const mapStateToProps = (store, ownProps) => {
     const { player } = store;
     return {
-        visible: player.loggedIn,
-        username: player.username
+        visible: player.loggedIn
     }
 }
 
 export default connect(
     mapStateToProps
-)(PlayerInfo);
+)(Table);
 

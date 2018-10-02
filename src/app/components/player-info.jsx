@@ -1,24 +1,18 @@
-import React, { Component } from 'react';
+import React from 'react';
 
-import WelcomeMessage from './welcome-message.jsx';
-import LoginForm from './login-form.jsx';
+const PlayerInfo = props => {
+	const { visible, username } = props;
 
-class PlayerInfo extends Component {
-    
-    handleLoginSubmit = username => {
-        this.props.handleLoginSubmit(username); 
-    }
-    
-    render() {
-        const { showLoginForm, username, handleLoginSubmit } = this.props;
+	if (!visible) {
+		return null;
+	}
 
-        return (
-            <section className="player-info">
-                <WelcomeMessage username={username} />
-                <LoginForm visible={showLoginForm} handleLoginSubmit={this.handleLoginSubmit} />
-            </section>
-        );
-    }
+	return (
+		<section className="player-info">
+			<h2>{username}</h2>
+			<h3>Balance: $1,000</h3>
+		</section>
+	)
 }
 
 export default PlayerInfo;
