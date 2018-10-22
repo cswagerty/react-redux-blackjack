@@ -1,4 +1,5 @@
 import { connect } from 'react-redux';
+import withVisibilityController from '../hocs/with-visibility-controller.jsx';
 
 import PlayerInfo from '../components/player-info.jsx';
 
@@ -10,7 +11,8 @@ const mapStateToProps = (store, ownProps) => {
     }
 }
 
-export default connect(
+const withConnection = connect(
     mapStateToProps
-)(PlayerInfo);
+);
 
+export default withConnection(withVisibilityController(PlayerInfo));

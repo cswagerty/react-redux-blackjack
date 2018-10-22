@@ -1,4 +1,5 @@
 import { connect } from 'react-redux';
+import withVisibilityController from '../hocs/with-visibility-controller.jsx';
 
 import LoginForm from '../components/login-form.jsx';
 import { logInPlayer } from '../actions/player-actions.js';
@@ -19,8 +20,9 @@ const mapDispatchToProps = dispatch => {
 }
 
 
-export default connect(
+const withConnection = connect(
     mapStateToProps,
     mapDispatchToProps
-)(LoginForm);
+);
 
+export default withConnection(withVisibilityController(LoginForm));

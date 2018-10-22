@@ -1,11 +1,7 @@
 import React from 'react';
 
 const PlayerInfo = props => {
-	const { visible, username } = props;
-
-	if (!visible) {
-		return null;
-	}
+	const { username } = props;
 
 	return (
 		<section className="player-info">

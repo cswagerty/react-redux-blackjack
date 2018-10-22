@@ -10,11 +10,6 @@ class LoginForm extends Component {
     }
     
     render() {
-        const { visible } = this.props;
-
-        if (visible === false) {
-            return null;
-        }
         
         return (
             <section className="player-login-form">
