@@ -1,6 +1,6 @@
 import mapActionsToReducers from './reducer-utils.js';
 
-const tableReducer = (state={}, action) => {
+const tableReducer = (state={status: 'BEFORE_CARDS_DEALT'}, action) => {
     const actionTypes = {
         DEAL_CARDS: handleDealCards,
         REQUEST_CARD: handleRequestCard
@@ -9,10 +9,15 @@ const tableReducer = (state={}, action) => {
     return mapActionsToReducers(actionTypes, action, state);
 };
 
-const handleDealCards = (state={}, action) => {
+const handleDealCards = (state, action) => {
     let deck = createDeck();
     const dealtCards = dealCards(deck)
-    return {...state, dealtCards: dealtCards, deck: deck}
+    return {
+        ...state, 
+        dealtCards: dealtCards, 
+        deck: deck, 
+        status: 'AFTER_CARDS_DEALT'
+    }
 };
 
 const handleRequestCard = (state={}, action) => {

@@ -4,20 +4,14 @@ const PlayerActions = props => {
 
 	return (
 		<ul className="player-actions">
-			<li>
-				<button 
-					className="player-action"
-					onClick={props.handleDealClick}
-				>Deal</button>
-			</li>
-			<li>
-				<button 
-					className="player-action"
-					onClick={props.handleHitClick}
-				>Hit</button>
-			</li>
+			{createPlayerActionButtons(props)}
 		</ul>
 	)
+}
+
+const createPlayerActionButtons = props => {
+	const { actionButtons } = props;
+	return actionButtons.map(button => <li className="player-action"><button onClick={props[button.clickHandler]}>{button.text}</button></li>);
 }
 
 export default PlayerActions;
