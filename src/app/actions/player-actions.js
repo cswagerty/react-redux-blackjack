@@ -4,3 +4,9 @@ export function logInPlayer(username) {
         payload: username
     };
 }
+
+export function dealCards() {
+    return {
+        type: 'DEAL_CARDS'
+    };
+}

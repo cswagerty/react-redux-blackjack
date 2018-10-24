@@ -4,9 +4,11 @@ import withVisibilityController from '../hocs/with-visibility-controller.jsx';
 import Table from '../components/table.jsx';
 
 const mapStateToProps = (store, ownProps) => {
-    const { player } = store;
+    const { player, table } = store;
     return {
-        visible: player.loggedIn
+        visible: player.loggedIn,
+        deck: table.deck,
+        dealtCards: table.dealtCards
     }
 }
 
