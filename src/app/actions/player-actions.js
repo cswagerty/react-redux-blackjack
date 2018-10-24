@@ -5,14 +5,16 @@ export function logInPlayer(player) {
     };
 }
 
-export function dealCards() {
+export function dealCards(playerId) {
     return {
-        type: 'DEAL_CARDS'
+        type: 'DEAL_CARDS',
+        payload: playerId
     };
 }
 
-export function requestCard() {
+export function requestCard(playerId) {
     return {
-        type: 'REQUEST_CARD'
+        type: 'REQUEST_CARD',
+        payload: playerId
     };
 }

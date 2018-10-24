@@ -24,19 +24,37 @@ const handlePlayerLogin = (state, action) => {
 
 const handleDealCards = (state, action) => {
     let deck = createDeck();
-    const dealtCards = dealCards(deck)
+    const dealtCards = dealCards(deck);
+
+    const players = assignCardsToPlayer([...state.players], action.payload, dealtCards);
+
     return {
         ...state, 
-        dealtCards: dealtCards, 
+        players: players, 
         deck: deck, 
         status: 'AFTER_CARDS_DEALT'
     }
 };
 
+const assignCardsToPlayer = (players, playerId, dealtCards) => {
+    // give the card to the appropriate player
+    const index = players.findIndex(player => player.id === playerId);
+    let playerCards = players[index].cards;
+    playerCards = playerCards || [];
+    players[index].cards = [...playerCards, ...dealtCards]
+    return players;
+}
+
 const handleRequestCard = (state={}, action) => {
-    const { deck, dealtCards } = state
-    const dealtCard = dealCards(deck, 1)[0];
-    return {...state, dealtCards: [...dealtCards, dealtCard], deck: deck}
+    const { deck } = state;
+    const dealtCards = dealCards(deck, 1);
+    const players = assignCardsToPlayer([...state.players], action.payload, dealtCards);
+
+    return {
+        ...state, 
+        players: players, 
+        deck: deck
+    }
 };
 
 const createDeck = () => {

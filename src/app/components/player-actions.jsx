@@ -10,8 +10,12 @@ const PlayerActions = props => {
 }
 
 const createPlayerActionButtons = props => {
-	const { actionButtons } = props;
-	return actionButtons.map(button => <li className="player-action"><button onClick={props[button.clickHandler]}>{button.text}</button></li>);
+	const { actionButtons, clickHandlers, playerId } = props;
+	return actionButtons.map(button => <li className="player-action"><button onClick={handleActionClick.bind(this, clickHandlers, button.handlerName, playerId)}>{button.text}</button></li>);
+}
+
+const handleActionClick = (clickHandlers, handlerName, playerId) => {
+	clickHandlers[handlerName](playerId)
 }
 
 export default PlayerActions;

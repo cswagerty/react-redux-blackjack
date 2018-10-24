@@ -9,6 +9,7 @@ const mapStateToProps = (store, ownProps) => {
 
     return {
         visible: player.loggedIn,
+        playerId: player.id,
         actionButtons: buildActionButtons(table.status)
     }
 }
@@ -19,7 +20,7 @@ const buildActionButtons = tableStatus => {
     const actionButtons = actions.map(action => {
         return {
             text: action,
-            clickHandler: `handle${action}Click`
+            handlerName: `handle${action}Click`
         }
     });
 
@@ -39,11 +40,13 @@ const getActions = tableStatus => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        handleDealClick: () => {
-            dispatch(dealCards());
-        },
-        handleHitClick: () => {
-            dispatch(requestCard());
+        clickHandlers: {
+            handleDealClick: playerId => {
+                dispatch(dealCards(playerId));
+            },
+            handleHitClick: playerId => {
+                dispatch(requestCard(playerId));
+            }
         }
     }
 }
