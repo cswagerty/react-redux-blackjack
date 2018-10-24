@@ -1,0 +1,39 @@
+.table {
+    border: 1px solid $yellow-primary;
+    display: flex;
+    flex-direction: column;
+    margin: 40px 0;
+    height: 440px;
+
+    .player-hand {
+        display: flex;
+        margin-top: auto;
+        justify-content: center;
+    }
+
+    .card {
+        width: 100px;
+        height: 120px;
+        border: 1px solid;
+        text-align: center;
+        margin-right: 15px;
+        padding: 8px;
+    }
+
+    .player-actions {
+        padding: 20px 0;
+        display: flex;
+        justify-content: space-between;
+        margin: auto auto 0;
+        min-width: 200px;
+        
+        li {
+            list-style-type: none;
+        }
+        
+        button {
+            @include primary-button;
+        }
+    }
+}
+

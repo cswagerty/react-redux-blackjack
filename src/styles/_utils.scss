@@ -1,0 +1,13 @@
+$yellow-primary: #efc371;
+
+@mixin primary-button($height:30px, $vertical-padding: 10px) {
+    background-color: $yellow-primary;
+    border: 1px solid $yellow-primary;
+    height: $height;
+    $vertical-padding: 10px;
+    padding: $vertical-padding/2 20px;
+    line-height: $height - $vertical-padding; // center text on button
+    font-size: 13px;
+    font-weight: bold;
+    border-radius: 1px;
+}

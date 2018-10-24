@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import withVisibilityController from '../hocs/with-visibility-controller.jsx';
 
-import { dealCards } from '../actions/player-actions';
+import { dealCards, requestCard } from '../actions/player-actions';
 import PlayerActions from '../components/player-actions.jsx';
 
 const mapStateToProps = (store, ownProps) => {
@@ -15,6 +15,9 @@ const mapDispatchToProps = dispatch => {
     return {
         handleDealClick: () => {
             dispatch(dealCards());
+        },
+        handleHitClick: () => {
+            dispatch(requestCard());
         }
     }
 }

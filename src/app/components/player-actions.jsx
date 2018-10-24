@@ -10,6 +10,12 @@ const PlayerActions = props => {
 					onClick={props.handleDealClick}
 				>Deal</button>
 			</li>
+			<li>
+				<button 
+					className="player-action"
+					onClick={props.handleHitClick}
+				>Hit</button>
+			</li>
 		</ul>
 	)
 }

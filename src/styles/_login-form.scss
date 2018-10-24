@@ -1,0 +1,15 @@
+.player-login-form {
+    $form-element-height: 30px;
+
+    text-align: center;
+
+    input[type="text"] {
+        height: $form-element-height;
+        margin-right: 10px;
+    }
+    
+    input[type="submit"] {
+        @include primary-button($form-element-height);
+        margin-top: 20px;
+    }
+}
