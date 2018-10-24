@@ -1,7 +1,7 @@
-export function logInPlayer(username) {
+export function logInPlayer(player) {
     return {
-        type: 'LOGGED_IN',
-        payload: username
+        type: 'LOG_IN_PLAYER',
+        payload: player
     };
 }
 

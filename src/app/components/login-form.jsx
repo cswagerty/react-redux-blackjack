@@ -31,8 +31,10 @@ class LoginForm extends Component {
     }
     
     handleSubmit = e => {
+        const { username } = this.state;
+        const { handleLoginSubmit, players } = this.props
         e.preventDefault();
-        this.props.handleLoginSubmit(this.state.username);
+        handleLoginSubmit(username, players);
     }
 }
 

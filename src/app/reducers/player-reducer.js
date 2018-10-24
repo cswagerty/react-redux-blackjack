@@ -1,12 +1,12 @@
 import mapActionsToReducers from './reducer-utils.js';
 
-const updateLoggedInState = (state, action) => {
-	return {...state, username: action.payload, loggedIn: true}
+const handlePlayerLogin = (state, action) => {
+	return {...state, ...action.payload, loggedIn: true}
 }
 
 const playerReducer = (state={loggedIn: false}, action) => {
     const actionTypes = {
-        LOGGED_IN: updateLoggedInState
+        LOG_IN_PLAYER: handlePlayerLogin
     };
     
     return mapActionsToReducers(actionTypes, action, state);

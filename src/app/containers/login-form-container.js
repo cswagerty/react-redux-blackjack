@@ -5,16 +5,21 @@ import LoginForm from '../components/login-form.jsx';
 import { logInPlayer } from '../actions/player-actions.js';
 
 const mapStateToProps = (store, ownProps) => {
-    const { player } = store;
+    const { player, table } = store;
     return {
-        visible: !player.loggedIn
+        visible: !player.loggedIn,
+        players: table.players
     }
 }
 
 const mapDispatchToProps = dispatch => {
     return {
-        handleLoginSubmit: username => {
-            dispatch(logInPlayer(username));
+        handleLoginSubmit: (username, players) => {
+            const newPlayer = {
+                id: players.length,
+                username: username
+            };
+            dispatch(logInPlayer(newPlayer));
         }
     }
 }
