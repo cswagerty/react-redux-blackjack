@@ -14,7 +14,7 @@ module.exports = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-        title: 'REACT BOILERPLATE' // creates index.html in dist
+        title: 'React/Redux Blackjack' // creates index.html in dist
     }),
     new CleanWebpackPlugin(['dist']),  //blows away /dist folder on build
     new webpack.HotModuleReplacementPlugin()
@@ -25,6 +25,11 @@ module.exports = {
             test: /\.(js|jsx)$/,
             exclude: /(node_modules)/,
             loader: "babel-loader?cacheDirectory=true"
+        },
+        {
+            test: /\.test\.js$/,
+            exclude: /(node_modules)/,
+            loader: "babel-jest"
         },
         {
             test: /\.(scss|css)$/,
