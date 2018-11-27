@@ -6,7 +6,7 @@
   "scripts": {
     "build": "webpack",
     "server": "node server.js",
-    "test": "jest"
+    "test": "jest --watchAll"
   },
   "author": "Corbin Swagerty",
   "devDependencies": {
