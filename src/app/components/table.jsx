@@ -1,6 +1,6 @@
 import React from 'react';
 
-import PlayerScoreContainer from '../containers/player-score-container';
+import PlayerResultsContainer from '../containers/player-results-container';
 import PlayerActionsContainer from '../containers/player-actions-container';
 import PlayerHand from '../components/player-hand.jsx';
 
@@ -8,7 +8,7 @@ const Table = props => {
 
 	return (
 		<section className="table">
-			<PlayerScoreContainer />
+			<PlayerResultsContainer />
 			<PlayerHand dealtCards={props.dealtCards} />
 			<PlayerActionsContainer />
 		</section>
