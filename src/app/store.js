@@ -8,5 +8,10 @@ const reducers = combineReducers({
 	table: tableReducer
 });
 
+const store = createStore(
+   reducers,
+	window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+ );
+
 // create singleton instance of store that can be imported
-export default createStore(reducers);
+export default store;
