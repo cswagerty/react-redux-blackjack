@@ -1,4 +1,5 @@
 import mapActionsToReducers from './reducer-utils.js';
+import { getScoresFromCards } from '../utils/scoring-utils.js';
 
 const initialTableState = {
     status: 'BEFORE_CARDS_DEALT',
@@ -25,8 +26,11 @@ const handlePlayerLogin = (state, action) => {
 const handleDealCards = (state, action) => {
     let deck = createDeck();
     const dealtCards = dealCards(deck);
-
-    const players = assignCardsToPlayer([...state.players], action.payload, dealtCards);
+    const playerId = action.payload;
+    let players = [...state.players];
+    let player = players.find(player => player.id === playerId);
+    player.cards = dealtCards;
+    player.scores = getScoresFromCards(player.cards);
 
     return {
         ...state, 
@@ -36,19 +40,13 @@ const handleDealCards = (state, action) => {
     }
 };
 
-const assignCardsToPlayer = (players, playerId, dealtCards) => {
-    // give the card to the appropriate player
-    const index = players.findIndex(player => player.id === playerId);
-    let playerCards = players[index].cards;
-    playerCards = playerCards || [];
-    players[index].cards = [...playerCards, ...dealtCards]
-    return players;
-}
-
 const handleRequestCard = (state={}, action) => {
-    const { deck } = state;
+    const { deck, players } = state;
     const dealtCards = dealCards(deck, 1);
-    const players = assignCardsToPlayer([...state.players], action.payload, dealtCards);
+    const playerId = action.payload;
+    let player = players.find(player => player.id === playerId);
+    player.cards = [...player.cards, ...dealtCards];
+    player.scores = getScoresFromCards(player.cards);
 
     return {
         ...state, 
