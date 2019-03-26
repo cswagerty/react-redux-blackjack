@@ -6,11 +6,19 @@ const initialTableState = {
     players: []
 };
 
+const initialPlayerState = {
+    cards: [],
+    scores: [],
+    status: 'TURN_PENDING'
+};
+
 const tableReducer = (state=initialTableState, action) => {
     const actionTypes = {
         LOG_IN_PLAYER: handlePlayerLogin,
         DEAL_CARDS: handleDealCards,
-        REQUEST_CARD: handleRequestCard
+        REQUEST_CARD: handleRequestCard,
+        END_TURN: handleEndTurn,
+        RESET_TABLE:  handleResetTable
     };
     
     return mapActionsToReducers(actionTypes, action, state);
@@ -41,17 +49,26 @@ const handleDealCards = (state, action) => {
 };
 
 const handleRequestCard = (state={}, action) => {
-    const { deck, players } = state;
+    let { deck, players, status } = state;
     const dealtCards = dealCards(deck, 1);
     const playerId = action.payload;
     let player = players.find(player => player.id === playerId);
     player.cards = [...player.cards, ...dealtCards];
     player.scores = getScoresFromCards(player.cards);
 
+    if (player.scores.some(score => score >= 21)) {
+        player.status = 'TURN_COMPLETE';
+    }
+
+    if (allTurnsComplete(players)) {
+        status = 'ALL_TURNS_COMPLETE';
+    }
+
     return {
         ...state, 
         players: players, 
-        deck: deck
+        deck: deck,
+        status: status
     }
 };
 
@@ -96,5 +113,46 @@ const dealCards = (deck, numberOfCards=2) => {
     }
     return dealtCards;
 }
+
+const handleEndTurn = (state, action) => {
+    // update table and player status when
+    // turn is complete
+    let { deck, players, status } = state;
+    const playerId = action.payload;
+    let player = players.find(player => player.id === playerId);
+    player.status = 'TURN_COMPLETE';
+
+
+    if (allTurnsComplete(players)) {
+        status = 'ALL_TURNS_COMPLETE';
+    }
+
+    return {
+        ...state, 
+        players: players,
+        status: status
+    };
+}
+
+const allTurnsComplete = players => {
+    return players.every(player => player.status === 'TURN_COMPLETE');
+}
+
+const handleResetTable = (state, action) => {
+    let { deck, players } = state;
+
+    players = resetPlayersToInitialState(players);
+
+    return {
+        ...state,
+        deck: [],
+        status: 'BEFORE_CARDS_DEALT',
+        players: players
+    };
+}
+
+const resetPlayersToInitialState = players => {
+    return players.map(player => Object.assign(player, initialPlayerState));
+};
 
 export default tableReducer;

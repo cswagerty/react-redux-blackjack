@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import withVisibilityController from '../hocs/with-visibility-controller.jsx';
 
-import { dealCards, requestCard } from '../actions/player-actions';
+import { dealCards, requestCard, endTurn, resetTable } from '../actions/player-actions';
 import PlayerActions from '../components/player-actions.jsx';
 
 const mapStateToProps = (store, ownProps) => {
@@ -32,7 +32,8 @@ const getActions = tableStatus => {
     // based on what the game's status
     const actions = {
         BEFORE_CARDS_DEALT: ['Deal'],
-        AFTER_CARDS_DEALT: ['Hit']
+        AFTER_CARDS_DEALT: ['Hit', 'Stay'],
+        ALL_TURNS_COMPLETE: ['Reset']
     };
 
     return actions[tableStatus];
@@ -46,6 +47,12 @@ const mapDispatchToProps = dispatch => {
             },
             handleHitClick: playerId => {
                 dispatch(requestCard(playerId));
+            },
+            handleStayClick: playerId => {
+                dispatch(endTurn(playerId));
+            },
+            handleResetClick: () => {
+                dispatch(resetTable());
             }
         }
     }

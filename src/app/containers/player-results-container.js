@@ -6,7 +6,7 @@ import PlayerResults from '../components/player-results.jsx';
 const mapStateToProps = (store, ownProps) => {
     const { player, table } = store;
 
-    const visibleStatuses = ['AFTER_CARDS_DEALT'];
+    const visibleStatuses = ['AFTER_CARDS_DEALT', 'ALL_TURNS_COMPLETE'];
     const players = [...table.players];
     const currentPlayerId = player.id;
     const currentPlayer = players.find(player => player.id === currentPlayerId);

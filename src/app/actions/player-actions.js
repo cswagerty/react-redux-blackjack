@@ -18,3 +18,16 @@ export function requestCard(playerId) {
         payload: playerId
     };
 }
+
+export function endTurn(playerId) {
+    return {
+        type: 'END_TURN',
+        payload: playerId
+    };
+}
+
+export function resetTable() {
+    return {
+        type: 'RESET_TABLE'
+    };
+}
