@@ -4,17 +4,17 @@ import withVisibilityController from '../hocs/with-visibility-controller.jsx';
 import PlayerResults from '../components/player-results.jsx';
 
 const mapStateToProps = (store, ownProps) => {
-    const { player, table } = store;
+    const { table } = store;
+    const { playerId } = ownProps;
 
     const visibleStatuses = ['AFTER_CARDS_DEALT', 'ALL_TURNS_COMPLETE'];
-    const players = [...table.players];
-    const currentPlayerId = player.id;
-    const currentPlayer = players.find(player => player.id === currentPlayerId);
+    const player = table.players.find(player => player.id === playerId);
+    const { scores, cards } = player;
 
     return {
         visible: visibleStatuses.includes(table.status),
-        score: formatScores(currentPlayer.scores),
-        status: getHandStatus(currentPlayer.scores, currentPlayer.cards)
+        score: formatScores(scores),
+        status: getHandStatus(scores, cards)
     }
 }
 

@@ -26,19 +26,39 @@ const tableReducer = (state=initialTableState, action) => {
 
 const handlePlayerLogin = (state, action) => {
     const newPlayerId = action.payload.id;
-    const players = [...state.players, {id: newPlayerId}];
+    let players = addPlayer(state.players, newPlayerId);
+
+    if (!hasDealer(players)) {
+        const dealerId = players.length;
+        players = addPlayer(players, dealerId, true);
+    }
 
     return {...state, players: players}
 }
 
+const addPlayer = (players, newPlayerId, isDealer=false) => {
+    return players.concat({
+        id: newPlayerId,
+        isDealer: isDealer
+    });
+}
+
+const hasDealer = players => {
+    return players.filter(player => player.isDealer).length !== 0;
+}
+
 const handleDealCards = (state, action) => {
+    let { players } = state;
     let deck = createDeck();
-    const dealtCards = dealCards(deck);
-    const playerId = action.payload;
-    let players = [...state.players];
-    let player = players.find(player => player.id === playerId);
-    player.cards = dealtCards;
-    player.scores = getScoresFromCards(player.cards);
+
+    players = players.map(player => {
+        const dealtCards = dealCards(deck);
+        return {
+            ...player,
+            cards: dealtCards,
+            scores: getScoresFromCards(dealtCards)
+        };
+    });    
 
     return {
         ...state, 

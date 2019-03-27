@@ -8,7 +8,6 @@ import TableContainer from './containers/table-container';
 const App = () => {
 	return (
 		<main id="main">
-			<h1>React/Redux Blackjack</h1>
 			<LoginFormContainer />
 			<TableContainer />
 			<PlayerInfoContainer />

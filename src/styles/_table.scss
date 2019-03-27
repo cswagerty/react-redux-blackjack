@@ -5,6 +5,19 @@
     margin: 40px 0;
     height: 440px;
 
+    .player {
+        // always display the dealer first and the current user last
+        order: 2;
+        
+        &-dealer {
+            order: 1;
+        }
+
+        &-user {
+            order: 3;
+        }
+    }
+
     .player-hand {
         display: flex;
         margin-top: auto;
@@ -26,6 +39,7 @@
         justify-content: space-around;
         margin: auto auto 0;
         min-width: 200px;
+        order: 4;  // always show at bottom
         
         li {
             list-style-type: none;

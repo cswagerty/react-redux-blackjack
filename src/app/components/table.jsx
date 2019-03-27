@@ -1,15 +1,15 @@
 import React from 'react';
 
-import PlayerResultsContainer from '../containers/player-results-container';
+import PlayerContainer from '../containers/player-container';
 import PlayerActionsContainer from '../containers/player-actions-container';
-import PlayerHand from '../components/player-hand.jsx';
+
 
 const Table = props => {
+	const { players } = props;
 
 	return (
 		<section className="table">
-			<PlayerResultsContainer />
-			<PlayerHand dealtCards={props.dealtCards} />
+			{players.map(player => <PlayerContainer id={player.id} />)}
 			<PlayerActionsContainer />
 		</section>
 	);
