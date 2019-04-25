@@ -10,12 +10,12 @@ const mapStateToProps = (store, ownProps) => {
     return {
         visible: player.loggedIn,
         playerId: player.id,
-        actionButtons: buildActionButtons(table.status)
+        actionButtons: buildActionButtons(table.players)
     }
 }
 
-const buildActionButtons = tableStatus => {
-    const actions = getActions(tableStatus);
+const buildActionButtons = players => {
+    const actions = getActions(players);
 
     const actionButtons = actions.map(action => {
         return {
@@ -27,16 +27,30 @@ const buildActionButtons = tableStatus => {
     return actionButtons;
 }
 
-const getActions = tableStatus => {
+const getActions = players => {
     // Determine which player actions are available
-    // based on what the game's status
-    const actions = {
-        BEFORE_CARDS_DEALT: ['Deal'],
-        AFTER_CARDS_DEALT: ['Hit', 'Stay'],
-        ALL_TURNS_COMPLETE: ['Reset']
-    };
+    // based on the the player's status
 
-    return actions[tableStatus];
+    const player = players.find(player => !player.isDealer);
+    const dealer = players.find(player => player.isDealer);
+
+    if (player.status === "TURN_PENDING") {
+        return ['Deal'];
+    }
+
+    if (player.status === "TURN_ACTIVE") {
+        return ['Hit', 'Stay'];
+    }
+
+    if (dealer.status === "TURN_ACTIVE") {
+        // It is the dealer's turn so player has no action buttons
+        return [];
+    }
+
+    if (dealer.status === "TURN_COMPLETED") {
+        // It is the dealer's turn so player has no action buttons
+        return ['Reset'];
+    }
 }
 
 const mapDispatchToProps = dispatch => {

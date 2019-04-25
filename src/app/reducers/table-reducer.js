@@ -38,6 +38,7 @@ const handlePlayerLogin = (state, action) => {
 
 const addPlayer = (players, newPlayerId, isDealer=false) => {
     return players.concat({
+        ...initialPlayerState,
         id: newPlayerId,
         isDealer: isDealer
     });
@@ -56,7 +57,8 @@ const handleDealCards = (state, action) => {
         return {
             ...player,
             cards: dealtCards,
-            scores: getScoresFromCards(dealtCards)
+            scores: getScoresFromCards(dealtCards),
+            status: getPlayerStatus(player)
         };
     });    
 
@@ -68,21 +70,24 @@ const handleDealCards = (state, action) => {
     }
 };
 
+const getPlayerStatus= player => {
+    if (player.scores.some(score => score >= 21)) {
+        return 'TURN_COMPLETED';
+    }
+
+    // if no blackjacks, it is the players turn
+    return !player.isDealer ? 'TURN_ACTIVE' : 'TURN_PENDING'
+}
+
 const handleRequestCard = (state={}, action) => {
     let { deck, players, status } = state;
     const dealtCards = dealCards(deck, 1);
     const playerId = action.payload;
-    let player = players.find(player => player.id === playerId);
-    player.cards = [...player.cards, ...dealtCards];
-    player.scores = getScoresFromCards(player.cards);
+    let activePlayer = players.find(player => player.id === playerId);
+    activePlayer.cards = [...activePlayer.cards, ...dealtCards];
+    activePlayer.scores = getScoresFromCards(activePlayer.cards);
+    players = updateTurnStatus(activePlayer, players);
 
-    if (player.scores.some(score => score >= 21)) {
-        player.status = 'TURN_COMPLETE';
-    }
-
-    if (allTurnsComplete(players)) {
-        status = 'ALL_TURNS_COMPLETE';
-    }
 
     return {
         ...state, 
@@ -91,6 +96,24 @@ const handleRequestCard = (state={}, action) => {
         status: status
     }
 };
+
+const updateTurnStatus = (activePlayer, players) => {
+   
+    if (activePlayer.scores.some(score => score >= 21)) {
+        // if player busts or draws to 21, their turn 
+        activePlayer.status = 'TURN_COMPLETED';
+
+        if (activePlayer.isDealer) {
+            return players;
+        }
+
+        // if user player has completed turn, set the dealers turn to active
+        const dealer = players.find(player => player.isDealer);
+        dealer.status = 'TURN_ACTIVE';
+    }
+
+    return players;
+}
 
 const createDeck = () => {
     let deck = [];
@@ -140,22 +163,19 @@ const handleEndTurn = (state, action) => {
     let { deck, players, status } = state;
     const playerId = action.payload;
     let player = players.find(player => player.id === playerId);
-    player.status = 'TURN_COMPLETE';
+    player.status = 'TURN_COMPLETED';
 
-
-    if (allTurnsComplete(players)) {
-        status = 'ALL_TURNS_COMPLETE';
+    if (!player.isDealer) {
+        // if this is the user ends their turn, it is now the dealer's turn
+        const dealer = players.find(player => player.isDealer);
+        dealer.status = 'TURN_ACTIVE';
     }
-
+    
     return {
         ...state, 
         players: players,
         status: status
     };
-}
-
-const allTurnsComplete = players => {
-    return players.every(player => player.status === 'TURN_COMPLETE');
 }
 
 const handleResetTable = (state, action) => {
