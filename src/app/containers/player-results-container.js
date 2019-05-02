@@ -36,10 +36,14 @@ const formatScores = (scores=[], status) => {
     
     // If turn is over, only display the highest score
     if (status === 'TURN_COMPLETED') {
-        scores = [ scores[scores.length - 1] ];
+        scores = [ getMaxValue(scores) ];
     }
 
     return scores.join('/');
+}
+
+const getMaxValue = arr => {
+    return arr.reduce((accValue, value) => value > accValue ? value : accValue, 0);
 }
 
 const withConnection = connect(
