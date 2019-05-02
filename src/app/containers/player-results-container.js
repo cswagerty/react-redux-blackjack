@@ -9,11 +9,11 @@ const mapStateToProps = (store, ownProps) => {
 
     const visibleStatuses = ['AFTER_CARDS_DEALT', 'ALL_TURNS_COMPLETE'];
     const player = table.players.find(player => player.id === playerId);
-    const { scores, cards } = player;
+    const { scores, cards, status } = player;
 
     return {
         visible: visibleStatuses.includes(table.status),
-        score: formatScores(scores),
+        score: formatScores(scores, status),
         status: getHandStatus(scores, cards)
     }
 }
@@ -30,9 +30,15 @@ const getHandStatus = (scores=[], cards) => {
     return null;
 }
 
-const formatScores = (scores=[]) => {
+const formatScores = (scores=[], status) => {
     // If a hand has an ace output possible scores separated by a / 
     // i.e. A, 3 => "4/14"
+    
+    // If turn is over, only display the highest score
+    if (status === 'TURN_COMPLETED') {
+        scores = [ scores[scores.length - 1] ];
+    }
+
     return scores.join('/');
 }
 

@@ -5,9 +5,13 @@ import DealerCommander from '../components/dealer-commander.jsx';
 
 const mapStateToProps = (store, ownProps) => {
     const { player, table } = store;
+    const dealer = table.players.find(player => player.isDealer);
+    const { id, scores, status } = dealer;
 
     return {
-        id: table.players.find(player => player.isDealer).id
+        id: id,
+        turnActive: status === 'TURN_ACTIVE',
+        scores: scores
     }
 }
 
@@ -16,7 +20,7 @@ const mapDispatchToProps = dispatch => {
         triggerDealerHit: playerId => {
             dispatch(requestCard(playerId));
         },
-        handleDealerStay: playerId => {
+        triggerDealerStay: playerId => {
             dispatch(endTurn(playerId));
         }
     }
