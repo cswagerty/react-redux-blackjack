@@ -1,13 +1,27 @@
-$yellow-primary: #efc371;
+// reusable variables
+$yellow-primary: #EBF096;
 
-@mixin primary-button($height:30px, $vertical-padding: 10px) {
-    background-color: $yellow-primary;
-    border: 1px solid $yellow-primary;
+$table-color: #386943;
+$btn-transition-time: 300ms;
+$btn-transition-function: cubic-bezier(0.4, 0, 0.6, 1);
+
+@mixin primary-button($height:40px, $vertical-padding: 10px) {
+    background-color: transparent;
+    border: 2px solid $yellow-primary;
+    color: $yellow-primary;
+    cursor: pointer;
     height: $height;
     $vertical-padding: 10px;
-    padding: $vertical-padding/2 20px;
+    padding: $vertical-padding/2 30px;
     line-height: $height - $vertical-padding; // center text on button
-    font-size: 13px;
-    font-weight: bold;
-    border-radius: 1px;
+    font-size: 20px;
+    font-family: Helvetica, sans-serif;
+    //font-weight: bold;
+    border-radius: $height / 2;
+    transition: $btn-transition-time background $btn-transition-function, $btn-transition-time color $btn-transition-function;
+
+    &:hover {
+    	background-color: $yellow-primary;
+    	color: $table-color;
+    }
 }
