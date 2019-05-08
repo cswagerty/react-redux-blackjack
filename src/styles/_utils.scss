@@ -1,6 +1,13 @@
 // reusable variables
-$yellow-primary: #EBF096;
 
+// fonts
+$serif-default: Georgia, serif;
+$sans-default: Helvetica, sans-serif;
+
+// colors
+$light-green: #5D924D;
+$yellow-primary: #EBF096;
+$light-brown: #8A5F3F;
 $table-color: #386943;
 $btn-transition-time: 300ms;
 $btn-transition-function: cubic-bezier(0.4, 0, 0.6, 1);
@@ -14,9 +21,7 @@ $btn-transition-function: cubic-bezier(0.4, 0, 0.6, 1);
     $vertical-padding: 10px;
     padding: $vertical-padding/2 30px;
     line-height: $height - $vertical-padding; // center text on button
-    font-size: 20px;
-    font-family: Helvetica, sans-serif;
-    //font-weight: bold;
+    font-size: $height / 2;
     border-radius: $height / 2;
     transition: $btn-transition-time background $btn-transition-function, $btn-transition-time color $btn-transition-function;
 

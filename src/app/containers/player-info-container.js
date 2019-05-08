@@ -5,9 +5,10 @@ import PlayerInfo from '../components/player-info.jsx';
 
 const mapStateToProps = (store, ownProps) => {
     const { player } = store;
+    const { isDealer } = ownProps;
     return {
         visible: player.loggedIn,
-        username: player.username
+        username: isDealer ? 'Dealer' : player.username,
     }
 }
 

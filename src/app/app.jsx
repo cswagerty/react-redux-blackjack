@@ -9,6 +9,7 @@ const App = () => {
 	return (
 		<main id="main">
 			<LoginFormContainer />
+			<PlayerInfoContainer isDealer={true} />
 			<TableContainer />
 			<PlayerInfoContainer />
 		</main>

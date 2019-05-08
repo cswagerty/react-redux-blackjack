@@ -6,22 +6,19 @@
 @import 'utils';
 @import 'login-form';
 @import 'table';
+@import 'player-info'; 
 
 * {
     box-sizing: border-box;
 }
 
 html {
-    background-color: black;
+    background-color: $light-green;
     color: $yellow-primary;
-    font-family: "Courier New";
+    font-family: $sans-default;
 }
 
 main {
-    max-width: 760px;
     min-height: 700px;
     margin: 40px auto;
-    border: 1px solid #C5C8D4;
-    padding: 40px;
-    text-align: center;
 }
