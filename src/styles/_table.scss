@@ -1,3 +1,5 @@
+@import './card';
+
 .table {
     background-color: $table-color;
     border: 10px solid $light-brown;
@@ -24,15 +26,6 @@
         display: flex;
         margin-top: auto;
         justify-content: center;
-    }
-
-    .card {
-        width: 100px;
-        height: 120px;
-        border: 1px solid;
-        text-align: center;
-        margin-right: 15px;
-        padding: 8px;
     }
 
     .player-result {

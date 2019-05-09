@@ -1,0 +1,82 @@
+$card-height: 175px;
+$card-width: $card-height * (7/10);
+$card-red: #c00;
+$card-black: #000;
+
+
+.card {
+    width: $card-width;
+    height: $card-height;
+    position: relative;
+    transform-style: preserve-3d;
+    transition: transform 0.6s;
+    margin-right: 15px;
+
+    &-red {
+        color: $card-red;    
+    }
+
+    &-black {
+        color: $card-black;    
+    } 
+}
+
+.face {
+    height: $card-height;
+    box-sizing: border-box;
+    border-radius: $card-height / 20;
+    border: 1px solid #333;
+    backface-visibility: hidden;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    
+    &-front {
+        z-index: 1;
+        display: flex;
+        padding: $card-height / 10;
+        background-color: white;
+    }
+    
+    &-back {
+        background-color: cornflowerblue;
+        transform: rotateY(180deg);
+    }
+}
+
+.card.flipped {
+    transform: rotateY(180deg);
+}
+
+.card-corner {
+    display: flex;
+    flex-direction: column; 
+    font-size: $card-height / 10;
+    
+    &.card-corner-top {
+        align-self: flex-start;
+    }
+    
+    &.card-corner-bottom {
+        align-self: flex-end;
+        transform: rotate(180deg);
+    }
+}
+
+.card-middle {
+    align-self: center;
+    flex-grow: 1;
+    font-size: $card-height / 4;
+    text-align: center;
+}
+
+.card-name,
+.card-suit {
+    text-align: center;
+}
+
+.card-name {
+    font-family: "Courier New", serif;
+    font-weight: 700;
+    line-height: 1;
+}
