@@ -24,6 +24,7 @@ $btn-transition-function: cubic-bezier(0.4, 0, 0.6, 1);
     font-size: $height / 2;
     border-radius: $height / 2;
     transition: $btn-transition-time background $btn-transition-function, $btn-transition-time color $btn-transition-function;
+    outline: none;
 
     &:hover {
     	background-color: $yellow-primary;
