@@ -1,5 +1,7 @@
 # React/Redux Blackjack
 
+<a href="http://104.196.232.15/">Play the live demo</a>
+
 <img src="./app-screenshot.png" width="600px" />
 
 ## Overview
