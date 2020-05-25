@@ -1,6 +1,6 @@
 # React/Redux Blackjack
 
-<a href="http://104.196.232.15/">Play the live demo</a>
+<a href="https://react-redux-blackjack.azurewebsites.net/">Play the live demo</a>
 
 <img src="./app-screenshot.png" width="600px" />
 
@@ -12,6 +12,7 @@ React/Redux Blackjack is a demonstration of how to build a blackjack game using 
 - Utilizes advanced React/Redux concepts including reducers, container components, and higher-order components
 - Game and display logic are controlled entirely with custom code. React and Redux are the only runtime JS libraries.
 - Dealer AI player automatically plays when it is his turn and hits based on casino rules.
+- Containerized NodeJS app hosted on Azure App Services at: <a href="https://react-redux-blackjack.azurewebsites.net/">https://react-redux-blackjack.azurewebsites.net/</a>
 
 ## Tech stack
 - React (JSX)
