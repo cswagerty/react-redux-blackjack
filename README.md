@@ -22,7 +22,17 @@ React/Redux Blackjack is a demonstration of how to build a blackjack game using 
 - Node
 
 ## Running the app locally
+
+### npm
+
 1. Clone the repo
 2. `npm install`
 3. `npm run server`
+4. go to <a href="http://localhost:3000/">http://localhost:3000/</a>
+
+### Docker Desktop
+
+1. Clone the repo
+2. `docker build -t react-redux-blackjack .`
+3. `docker run -it -p 3000:3000 react-redux-blackjack`
 4. go to <a href="http://localhost:3000/">http://localhost:3000/</a>
