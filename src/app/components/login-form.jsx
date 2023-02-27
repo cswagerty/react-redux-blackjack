@@ -13,7 +13,7 @@ class LoginForm extends Component {
         
         return (
             <section className="player-login-form">
-                <h1>React/Redux Blackjack</h1>
+                <h1>React/Redux Blackjack v0.0.1</h1>
                 <p>Enter a username to begin</p>
                 <form onSubmit={this.handleSubmit}>
                     <input type="text" 
