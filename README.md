@@ -1,4 +1,4 @@
-# React/Redux Blackjack
+# React/Redux Blackjack v0.0.1
 
 <a href="https://react-redux-blackjack.azurewebsites.net/">Play the live demo</a>
 
